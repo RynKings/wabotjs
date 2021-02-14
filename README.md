@@ -14,6 +14,7 @@ $ npm start
 ```js
 async function listen(client, message){
     console.log(message);
+    console.log(message.pattern[1])
     client.sendMessage(message.to, 'Hi too');
 }
 

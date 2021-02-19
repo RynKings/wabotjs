@@ -1,4 +1,7 @@
-(https://telegra.ph/file/4a5cf88056bee20b1c45d.jpg)
+
+## TE[A]MAN BOT <img src="https://github.com/TheDudeThatCode/TheDudeThatCode/blob/master/Assets/hmm.gif" width="29px"> ???
+<img align="center" height="auto" src="https://telegra.ph/file/4a5cf88056bee20b1c45d.jpg"/>
+
 
 # wabotjs
 This is unofficial Whatsapp Web API - Use at your own risk!!!

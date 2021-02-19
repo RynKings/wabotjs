@@ -79,6 +79,23 @@ exports.serialize = function(chat){
     m.text = txt
     return m
 }
+//serialize number
+function serializeNumberList(numbers){
+    var n = []
+    for (i in numbers){
+        n.push(serializeNumber(numbers[i]))
+    }
+    return n
+}
+
+function serializeNumber(number){
+    return normalizeNumber(number) + "@s.whatsapp.net"
+}
+
+function normalizeNumber(number){
+    return number.replace("@s.whatsapp.net", "").replace("@c.us","")
+}
+
 //download file url
 exports.downloadFile = function (uri, filename, callback) {
     request.head(uri, function (err, res, body) {
@@ -86,19 +103,19 @@ exports.downloadFile = function (uri, filename, callback) {
    })
 }
 
-exports.sleep = function(ms) {
+exports.sleep = async function(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 //sebd message
-exports.sendMessage = function(to, text){
-    wa.sendMessage(to, text, MessageType.text)
+exports.sendMessage = async function(to, text){
+    return wa.sendMessage(to, text, MessageType.text)
 }
 
 //send image
 exports.sendImage = function(to, filename, text=""){
 	const bufer = fs.readFileSync(filename)
-	wa.sendMessage(to, bufer, MessageType.image, {caption: text})
+	return wa.sendMessage(to, bufer, MessageType.image, {caption: text})
 }
 
 //send Audio
@@ -108,9 +125,9 @@ exports.sendAudio = function(to, filename, text=""){
 }
 
 //send Pdf
-exports.sendPdf = function(to, filename){
+exports.sendPdf = function(to, filename, text){
     const bufer = fs.readFileSync(filename)
-    wa.sendMessage(to, bufer, MessageType.document, { mimetype: Mimetype.pdf})
+    wa.sendMessage(to, bufer, MessageType.document, { mimetype: Mimetype.pdf, filename: text})
 }
 
 //send Video
@@ -386,3 +403,9 @@ exports.sendReplyWA = function(to, text, prevtext, mids=[]){
     ini = m.key.id
     wa.sendMessage(to, text, MessageType.extendedText, { contextInfo: {"mentionedJid": mids,"stanzaId": ini, "participant": waid, "quotedMessage": { "conversation": prevtext}} })
 }
+
+
+exports.serializeNumberList = serializeNumberList;
+exports.serializeNumber = serializeNumber;
+exports.normalizeNumber = normalizeNumber;
+exports.downloadURL = downloadURL;

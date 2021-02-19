@@ -18,5 +18,5 @@ async function listen(client, message){
     client.sendMessage(message.to, 'Hi too');
 }
 
-textListener(listen, false, true, /^.hi(?: |$)(.*)/);
+textListener(listen, false, true, /^.hi(?: |$)(.*)/, false, false);
 ```

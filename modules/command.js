@@ -10,9 +10,13 @@ event.on('message-new', async(chat) => {
 	if (regs){
 		if (regs[1]){
 			if (regs[1] in command_help){
-				wa.sendMessage(msg.key.remoteJid, command_help[regs[1]])
+				const response = await wa.sendMessage(msg.key.remoteJid, command_help[regs[1]])
+				await wa.sleep(20000)
+				await event.deleteMessage(msg.key.remoteJid, {id: response.key.id, remoteJid: msg.key.remoteJid, fromMe: true})
 			} else {
-				wa.sendMessage(msg.key.remoteJid, '```Help not found...```')
+				const response = await wa.sendMessage(msg.key.remoteJid, '```Help not found...```')
+				await wa.sleep(20000)
+				await event.deleteMessage(msg.key.remoteJid, {id: response.key.id, remoteJid: msg.key.remoteJid, fromMe: true})
 			}
 		} else {
 			r = 'List for all available commands below: \n'
@@ -21,7 +25,9 @@ event.on('message-new', async(chat) => {
 				n += 1
 				r += `${n}. ${cmd}\n`;
 			}
-			wa.sendMessage(msg.key.remoteJid, r)
+			const response = await wa.sendMessage(msg.key.remoteJid, r)
+			await wa.sleep(20000)
+			await event.deleteMessage(msg.key.remoteJid, {id: response.key.id, remoteJid: msg.key.remoteJid, fromMe: true})
 		}
 	}
 })

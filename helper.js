@@ -96,6 +96,11 @@ function normalizeNumber(number){
     return number.replace("@s.whatsapp.net", "").replace("@c.us","")
 }
 
+async function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+
 //download file url
 exports.downloadFile = function (uri, filename, callback) {
     request.head(uri, function (err, res, body) {
@@ -108,8 +113,13 @@ exports.sleep = async function(ms) {
 }
 
 //sebd message
-exports.sendMessage = async function(to, text){
-    return wa.sendMessage(to, text, MessageType.text)
+exports.sendMessage = async function(to, text, deleted){
+    var response = await wa.sendMessage(to, text, MessageType.text)
+    if (deleted){
+        await sleep(deleted * 1000)
+        await wa.deleteMessage(to, {id: response.key.id, remoteJid: to, fromMe: true})
+    }
+    return response
 }
 
 //send image

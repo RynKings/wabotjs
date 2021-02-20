@@ -1,5 +1,5 @@
 
-## TE[A]MAN BOT <img src="https://github.com/TheDudeThatCode/TheDudeThatCode/blob/master/Assets/hmm.gif" width="29px"> ???
+## TE[A]MAN BOT <img src="https://github.com/TheDudeThatCode/TheDudeThatCode/blob/master/Assets/hmm.gif" width="29px">
 <img align="center" height="auto" src="https://telegra.ph/file/4a5cf88056bee20b1c45d.jpg"/>
 
 
@@ -8,21 +8,18 @@ This is unofficial Whatsapp Web API - Use at your own risk!!!
 
 Install the dependencies and devDependencies and start the server.
 
+### Usage
 ```sh
-#Cloning This Repositories
 $ git clone https://github.com/rynkings/wabotjs
-
-# Open Directory
 $ cd wabotjs
-
-# Install Module
 $ npm i
-
+```
+```sh
 # Running Program
 $ npm start
 */Or
-# Autorestart when save file 
-$ npm autorestart
+# You can run with automatically restart when you edit the file
+$ supervisor main.js
 ```
 
 ### Register event like decorators
@@ -34,6 +31,13 @@ async function listen(client, message){
 }
 
 textListener(listen, false, true, /^.hi(?: |$)(.*)/, false, false);
+// textListener having some parameters
+// func: *Decorator function*
+// incoming: *Receiving message from user*
+// outgoing: *Receiving message from self user*
+// pattern: *for command*
+// mode: *for switch mode*
+// owners: *for filter the user*
 ```
 
 To make it easier if there is an Error Change in `data/setting.json` by using your number or with the ID Groups:
@@ -41,7 +45,7 @@ To make it easier if there is an Error Change in `data/setting.json` by using yo
 ```json
 // The setting.json example
 {
-	"logs": false,
+	"logs": false, //make it true if you want to use the bot to sending you some error logs or some notification from the bot
 	"logs_id": "Put_YOUR_NUMBER_OR_GROUP_ID",
 	"mode": "public",
 	"owners": []
